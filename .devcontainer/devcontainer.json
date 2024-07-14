@@ -26,7 +26,8 @@
 			"settings": {
 				"editor.fontSize": 20,
 				"terminal.integrated.fontSize": 20,
-				"editor.wordWrap": "on"
+				"editor.wordWrap": "on",
+				"code-runner.runInTerminal": true
 			}
 			
 		}
