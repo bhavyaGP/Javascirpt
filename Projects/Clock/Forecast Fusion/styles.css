@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.search-box input {
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    outline: none;
+}
+
+.search-box button {
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background: #ff9800;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+.search-box button:hover {
+    background: #fb8c00;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ff9800;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+.weather-details, .forecast-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weather-details div, .forecast-container div {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    text-align: center;
+}
+
+.forecast-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.forecast-container div {
+    flex: 1 1 calc(33.333% - 20px);
+    margin: 10px;
+}
+
+@media (max-width: 768px) {
+    .forecast-container div {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .forecast-container div {
+        flex: 1 1 100%;
+    }
+}
