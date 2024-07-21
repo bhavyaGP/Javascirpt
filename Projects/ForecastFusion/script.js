@@ -1,53 +1,33 @@
-document.getElementById('search-btn').addEventListener('click', fetchWeather);
+const button = document.getElementById("search-btn");
+const input = document.getElementById("city-input");
+const display = document.getElementById("current-weather-details");
 
-async function fetchWeather() {
-    const city = document.getElementById('city-input').value;
-    if (!city) return;
-
-    const apiKey = 'your_api_key';
-    const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&cnt=7&appid=${apiKey}&units=metric`;
-
-    try {
-        const [currentResponse, forecastResponse] = await Promise.all([
-            fetch(currentWeatherUrl),
-            fetch(forecastUrl)
-        ]);
-
-        const currentData = await currentResponse.json();
-        const forecastData = await forecastResponse.json();
-
-        updateCurrentWeather(currentData);
-        updateForecast(forecastData);
-    } catch (error) {
-        console.error('Error fetching weather data:', error);
-    }
+async function getdata(city) {
+    const promise = await fetch(`http://api.weatherapi.com/v1/current.json?key=feb655ebe37d4a84bcd162237242107&q=${city}&aqi=yes`);
+    return await promise.json();
 }
 
-function updateCurrentWeather(data) {
-    const weatherDetails = document.getElementById('current-weather-details');
-    weatherDetails.innerHTML = `
-        <div>
-            <h3>${data.name}</h3>
-            <p>${data.weather[0].description}</p>
-            <p>${data.main.temp} °C</p>
-            <p>Humidity: ${data.main.humidity}%</p>
-            <p>Wind Speed: ${data.wind.speed} m/s</p>
+button.addEventListener("click", async () => {
+    const value = input.value;
+    if (value) {
+        const data = await getdata(value);
+        displayWeather(data);
+    }
+});
+
+function displayWeather(data) {
+    display.innerHTML = `
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">${data.location.name}, ${data.location.region}, ${data.location.country}</h3>
+                <p class="card-text"><strong>Condition:</strong> ${data.current.condition.text}</p>
+                <p class="card-text"><strong>Temperature:</strong> ${data.current.temp_c} °C</p>
+                <p class="card-text"><strong>Feels Like:</strong> ${data.current.feelslike_c} °C</p>
+                <p class="card-text"><strong>Humidity:</strong> ${data.current.humidity}%</p>
+                <p class="card-text"><strong>Wind Speed:</strong> ${data.current.wind_kph} kph</p>
+                <p class="card-text"><strong>Wind Direction:</strong> ${data.current.wind_dir}</p>
+                <img class="weather-icon" src="https:${data.current.condition.icon}" alt="Weather icon">
+            </div>
         </div>
     `;
-}
-
-function updateForecast(data) {
-    const forecastContainer = document.getElementById('forecast-container');
-    forecastContainer.innerHTML = '';
-
-    data.list.forEach(day => {
-        const forecastDiv = document.createElement('div');
-        forecastDiv.innerHTML = `
-            <h4>${new Date(day.dt * 1000).toLocaleDateString()}</h4>
-            <p>${day.weather[0].description}</p>
-            <p>${day.temp.day} °C</p>
-        `;
-        forecastContainer.appendChild(forecastDiv);
-    });
 }
