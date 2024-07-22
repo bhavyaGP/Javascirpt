@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: "DejaVu Sans", "Liberation Sans", "Helvetica", "Arial",
+          sans-serif;
+      }
+
+      .container {
+        padding: 10px;
+        margin: 5px;
+      }
+      .highlight {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Activity 1 -->
+    <p id="para" onclick="fun()">Hello</p>
+    <div class="container" onclick="fun1()">Background color with Gray</div>
+    <!-- Activity 2 -->
+    <button onclick="createDiv()">Create and Append Div</button>
+    <button onclick="createLi()">Create and Append Li</button>
+    <ul id="list">
+      <li>Item 1</li>
+      <li>Item 2</li>
+    </ul>
+    <!-- Activity 3 -->
+    <button onclick="removeElement()">Remove Element</button>
+    <button onclick="removeLastChild()">Remove Last Child</button>
+    <div id="removeMe">Remove this element</div>
+    <!-- Activity 4 -->
+    <img id="image" src="old_image.jpg" alt="Sample Image" />
+    <button onclick="changeAttribute()">Change Image Source</button>
+    <button onclick="toggleClass()">Toggle Class</button>
+    <!-- Activity 5 -->
+    <button id="changeTextButton">Change Text</button>
+    <p id="textPara">Text to be changed</p>
+    <div id="mouseoverDiv">Mouse over me to change border color</div>
+  </body>
+  <script>
+    // Activity 1 
+    function fun() {
+      let change = document.getElementById("para");
+      change.textContent = "This is Bhavya";
+    }
+
+    function fun1() {
+      let vari = document.getElementsByClassName("container");
+      for (let i = 0; i < vari.length; i++) {
+        vari[i].style.backgroundColor = "gray";
+      }
+    }
+
+    // Activity 2
+    function createDiv() {
+      let newDiv = document.createElement("div");
+      newDiv.textContent = "New Div";
+      document.body.appendChild(newDiv);
+    }
+
+    function createLi() {
+      let newLi = document.createElement("li");
+      newLi.textContent = "New Item";
+      document.getElementById("list").appendChild(newLi);
+    }
+
+    // Activity 3
+    function removeElement() {
+      let element = document.getElementById("removeMe");
+      if (element) {
+        element.remove();
+      }
+    }
+
+    function removeLastChild() {
+      let list = document.getElementById("list");
+      if (list.lastElementChild) {
+        list.removeChild(list.lastElementChild);
+      }
+    }
+
+    // Activity 4
+    function changeAttribute() {
+      let img = document.getElementById("image");
+      img.src = "new_image.jpg";
+    }
+
+    function toggleClass() {
+      let element = document.getElementById("para");
+      element.classList.toggle("highlight");
+    }
+
+    // Activity 5
+    document
+      .getElementById("changeTextButton")
+      .addEventListener("click", function () {
+        document.getElementById("textPara").textContent =
+          "Text has been changed!";
+      });
+
+    document
+      .getElementById("mouseoverDiv")
+      .addEventListener("mouseover", function () {
+        this.style.borderColor = "blue";
+        this.style.borderWidth = "2px";
+        this.style.borderStyle = "solid";
+      });
+  </script>
+</html>
