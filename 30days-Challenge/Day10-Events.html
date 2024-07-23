@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        #myElement {
+            width: 200px;
+            height: 200px;
+            background-color: lightgrey;
+            text-align: center;
+            line-height: 200px;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="para">Lorem ipsum dolor sit amet.</p>
+    <img src="https://imgproxy.learnyst.com/https://learnyst-user-assets.s3.ap-south-1.amazonaws.com/school-assets/schools/171024/schoolLogo/1717484431216banner_lyst1717484431227.png?w=100&h=48&resizetype=fit"
+        id="image" alt="image" style="filter: blur(5px)" />
+    <a href="javascript:toggleImg()">Toggle Image</a>
+
+    <div id="myElement">Hover over me!</div>
+
+    <input type="text" id="keydownInput" placeholder="Type something...">
+
+
+    <input type="text" id="username" placeholder="username">
+    <input type="password" id="password" placeholder="password">
+    <button id="login">Login</button>
+
+    <ul id="list">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <div id="parent">
+        <button id="addButton">Add Item</button>
+    </div>
+</body>
+<script>
+    let para = document.getElementById("para");
+    para.addEventListener("click", (e) => {
+        para.textContent = "This is Bhavya From click event";
+    });
+    image.addEventListener("click", (e) => {
+        image.style.filter = "blur(0px)";
+    });
+    function toggleImg() {
+        let image = document.getElementById("image");
+
+        let checkForVisible = image.style.visibility == "visible";
+        if (checkForVisible) {
+            image.style.visibility = "hidden";
+        } else {
+            image.style.visibility = "visible";
+        }
+    }
+
+    const myElement = document.getElementById('myElement');
+
+    myElement.addEventListener('mouseover', () => {
+        myElement.style.backgroundColor = 'blue';
+    });
+
+    myElement.addEventListener('mouseout', () => {
+        myElement.style.backgroundColor = 'lightgrey';
+    });
+
+
+    const keydownInput = document.getElementById('keydownInput');
+
+    keydownInput.addEventListener('keydown', (event) => {
+        console.log(`Key pressed: ${event.key}`);
+    });
+
+    const login = document.getElementById('login');
+    login.addEventListener("click", () => {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        console.log(username, password);
+    });
+
+
+    const list = document.getElementById('list');
+
+    list.addEventListener('click', (event) => {
+        if (event.target.tagName === 'LI') {
+            console.log(`Clicked item: ${event.target.textContent}`);
+        }
+    });
+
+    const parent = document.getElementById('parent');
+    const addButton = document.getElementById('addButton');
+
+    // Add click event listener to parent element
+    parent.addEventListener('click', (event) => {
+        if (event.target.tagName === 'BUTTON' && event.target !== addButton) {
+            console.log(`Clicked dynamic button: ${event.target.textContent}`);
+        }
+    });
+
+    // Function to add a new button dynamically
+    function addNewButton() {
+        const newButton = document.createElement('button');
+        newButton.textContent = 'New Button';
+        parent.appendChild(newButton);
+    }
+
+    // Add click event listener to the "Add Item" button
+    addButton.addEventListener('click', addNewButton);
+</script>
+
+</html>
