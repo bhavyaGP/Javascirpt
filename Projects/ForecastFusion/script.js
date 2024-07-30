@@ -3,20 +3,22 @@ const input = document.getElementById("city-input");
 const display = document.getElementById("current-weather-details");
 
 async function getdata(city) {
-    const promise = await fetch(`http://api.weatherapi.com/v1/current.json?key=feb655ebe37d4a84bcd162237242107&q=${city}&aqi=yes`);
-    return await promise.json();
+  const promise = await fetch(
+    `http://api.weatherapi.com/v1/current.json?key=feb655ebe37d4a84bcd162237242107&q=${city}&aqi=yes`
+  );
+  return await promise.json();
 }
 
 button.addEventListener("click", async () => {
-    const value = input.value;
-    if (value) {
-        const data = await getdata(value);
-        displayWeather(data);
-    }
+  const value = input.value;
+  if (value) {
+    const data = await getdata(value);
+    displayWeather(data);
+  }
 });
 
 function displayWeather(data) {
-    display.innerHTML = `
+  display.innerHTML = `
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">${data.location.name}, ${data.location.region}, ${data.location.country}</h3>
